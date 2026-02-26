@@ -3,14 +3,17 @@ import 'package:devemtiazecom/core/services/local_storage_services/secure_storag
 import 'package:devemtiazecom/core/services/network_services/network_client.dart';
 import 'package:devemtiazecom/feature/home/model/product_model.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
+class HomeController extends GetxController with GetSingleTickerProviderStateMixin {
+  late TabController tabController;
   RxBool isLoading = false.obs;
   RxList<ProductModel> productList = <ProductModel>[].obs;
   @override
   void onInit() {
     super.onInit();
+    tabController = TabController(length: 6, vsync: this);
     fetchProducts();
   }
 
