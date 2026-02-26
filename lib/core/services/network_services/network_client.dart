@@ -175,7 +175,7 @@ class NetworkClient {
   NetworkResponse _successResponse(Response response) {
     final status = response.statusCode ?? -1;
 
-    // Your old code treated 200/201 as success
+    
     if (status == 200 || status == 201) {
       final data = _asMap(response.data);
       return NetworkResponse(
@@ -247,8 +247,11 @@ class NetworkClient {
   }
 
   Map<String, dynamic>? _asMap(dynamic data) {
-    // Dio can return Map already, or String sometimes
     if (data == null) return null;
+
+    if(data is List){
+      return {'items': data};
+    }
 
     if (data is Map<String, dynamic>) return data;
 
@@ -258,8 +261,6 @@ class NetworkClient {
         if (decoded is Map<String, dynamic>) return decoded;
       } catch (_) {}
     }
-
-    // Some APIs return Map<dynamic,dynamic>
     if (data is Map) {
       return data.map((k, v) => MapEntry(k.toString(), v));
     }
