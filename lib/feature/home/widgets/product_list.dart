@@ -14,19 +14,33 @@ class ProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      key: PageStorageKey(tabKey),
-      padding: const EdgeInsets.all(16),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
-        childAspectRatio: 0.60,
+    return RefreshIndicator(
+      onRefresh: () => homeController.fetchProducts(),
+      child: CustomScrollView(
+        key: PageStorageKey(tabKey),
+        physics: const AlwaysScrollableScrollPhysics(),
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.all(16),
+            sliver: SliverGrid(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 0.60,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return ProductCard(
+                    product: homeController.productList[index],
+                  );
+                },
+                childCount: homeController.productList.length,
+              ),
+            ),
+          ),
+        ],
       ),
-      itemCount: homeController.productList.length,
-      itemBuilder: (context, index) {
-        return ProductCard(product: homeController.productList[index]);
-      },
     );
   }
 }

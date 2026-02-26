@@ -18,6 +18,7 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   }
 
   Future<void> fetchProducts() async {
+    productList.clear();
     final token = await SecureStorageHelper.instance.getToken();
     try {
       isLoading.value = true;
