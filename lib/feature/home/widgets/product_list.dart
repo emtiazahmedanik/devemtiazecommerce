@@ -14,33 +14,39 @@ class ProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () => homeController.fetchProducts(),
-      child: CustomScrollView(
-        key: PageStorageKey(tabKey),
-        physics: const AlwaysScrollableScrollPhysics(),
-        slivers: [
-          SliverPadding(
-            padding: const EdgeInsets.all(16),
-            sliver: SliverGrid(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 9/16,
+    return Builder(
+      builder: (context) {
+        return RefreshIndicator(
+          onRefresh: () => homeController.fetchProducts(),
+          child: CustomScrollView(
+            key: PageStorageKey(tabKey),
+            physics: const AlwaysScrollableScrollPhysics(),
+            slivers: [
+              SliverOverlapInjector(
+                handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                  context,
+                ),
               ),
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  return ProductCard(
-                    product: homeController.productList[index],
-                  );
-                },
-                childCount: homeController.productList.length,
+              SliverPadding(
+                padding: const EdgeInsets.all(16),
+                sliver: SliverGrid(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
+                    childAspectRatio: 9 / 16,
+                  ),
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    return ProductCard(
+                      product: homeController.productList[index],
+                    );
+                  }, childCount: homeController.productList.length),
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
