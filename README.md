@@ -13,3 +13,6 @@ Ans: The inner CustomScrollView owns the vertical scroll, but NestedScrollView c
 Q3: Trade-offs or limitation?
 
 Ans: Although it feels like a single scroll, it’s Not Truly One Scrollable. NestedScrollView internally manages two coordinated ScrollPositions. There are two ScrollPositions (i)Outer (header) (ii)Inner (CustomScrollView per tab). They are just coordinated.
+
+!! Demo video here:
+https://drive.google.com/file/d/1tDRtRydOUeyYlOyS0iBTcs9Tbz7g7Urg/view?t=14
