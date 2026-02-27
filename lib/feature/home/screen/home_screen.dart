@@ -2,6 +2,7 @@ import 'package:devemtiazecom/feature/home/controller/home_controller.dart';
 import 'package:devemtiazecom/feature/home/widgets/product_card.dart';
 import 'package:devemtiazecom/feature/home/widgets/product_list.dart';
 import 'package:devemtiazecom/feature/home/widgets/sticky_tab_delegate.dart';
+import 'package:devemtiazecom/routes.dart';
 import 'package:devemtiazecom/utils/image_path.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -32,6 +33,18 @@ class HomeScreen extends StatelessWidget {
                     floating: false,
                     pinned: false,
                     backgroundColor: Colors.white,
+                    actions: [
+                      CircleAvatar(
+                        backgroundColor: Colors.grey[200],
+                        child: IconButton(
+                          onPressed: () {
+                            Get.toNamed(Routes.profileScreen);
+                          },
+                          icon: const Icon(FontAwesomeIcons.user, color: Colors.black,size: 14,),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                    ],
                   ),
                   SliverPadding(
                     padding: const EdgeInsets.only(bottom: 16),

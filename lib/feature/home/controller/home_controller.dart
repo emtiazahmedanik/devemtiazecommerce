@@ -49,4 +49,6 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
       isLoading.value = false;
     }
   }
+
+  
 }
