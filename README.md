@@ -1,16 +1,14 @@
 # devemtiazecom
 
-A new Flutter project.
+Q1: How is horizontal swipe implemented?
+Ans: Horizontal swipe is handled by TabBarView, which internally uses PageView. It listens for horizontal drag gestures and is synchronized with TabBar via a shared TabController.
 
-## Getting Started
+<\br>
 
-This project is a starting point for a Flutter application.
+Q2: Who owns vertical scroll and why?
+Ans: The inner CustomScrollView owns the vertical scroll, but NestedScrollView coordinates it with the outer slivers using SliverOverlapAbsorber and SliverOverlapInjector. This allows the header to collapse seamlessly while maintaining independent scroll positions per tab.
 
-A few resources to get you started if this is your first Flutter project:
+<\br>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Q3: Trade-offs or limitation?
+Ans: Although it feels like a single scroll, it’s Not Truly One Scrollable. NestedScrollView internally manages two coordinated ScrollPositions. There are two ScrollPositions (i)Outer (header) (ii)Inner (CustomScrollView per tab). They are just coordinated.
