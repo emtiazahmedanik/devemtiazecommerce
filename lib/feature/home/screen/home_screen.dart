@@ -2,6 +2,7 @@ import 'package:devemtiazecom/feature/home/controller/home_controller.dart';
 import 'package:devemtiazecom/feature/home/widgets/product_card.dart';
 import 'package:devemtiazecom/feature/home/widgets/product_list.dart';
 import 'package:devemtiazecom/feature/home/widgets/sticky_tab_delegate.dart';
+import 'package:devemtiazecom/utils/image_path.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -27,9 +28,10 @@ class HomeScreen extends StatelessWidget {
               headerSliverBuilder: (context, innerBoxIsScrolled) {
                 return [
                   SliverAppBar(
-                    title: const Text('Home'),
+                    title: Image.asset(ImagePath.homeScreenBack, height: 20),
                     floating: false,
                     pinned: false,
+                    backgroundColor: Colors.white,
                   ),
                   SliverPadding(
                     padding: const EdgeInsets.only(bottom: 16),
